@@ -4,11 +4,11 @@
 
 推荐克隆 https://github.com/itwanger/paiwarp-dsh 。不需要克隆 PaiCLI，也不需要 Codex。
 
-另一种方式是从 GitHub Releases 下载 `paiwarp-dsh-0.2.0.tgz`：
+另一种方式是从 GitHub Releases 下载 `paiwarp-dsh-0.2.1.tgz`：
 
 ```sh
 mkdir paiwarp-plugin
-tar -xzf paiwarp-dsh-0.2.0.tgz -C paiwarp-plugin
+tar -xzf paiwarp-dsh-0.2.1.tgz -C paiwarp-plugin
 cd paiwarp-plugin/package
 ```
 

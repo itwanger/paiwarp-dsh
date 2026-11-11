@@ -5,6 +5,7 @@ Case 是一份含输入、步骤和预期结果的测试案例。这里的文件
 | 你要做什么 | 从哪里开始 |
 | --- | --- |
 | 第一次安装，确认终端可用 | [Python 标准库待办程序](python-cli/case.md) |
+| 看彩色状态变化、Git 差异、交互式数据检查 | [Color Lab：三个完整案例](color-lab/README.md) |
 | 测试自己的项目 | [复制案例模板](case-template.md) |
 | 测试 PaiCLI | [准备说明与前三章](paicli/README.md) |
 

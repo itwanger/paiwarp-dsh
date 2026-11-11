@@ -1,6 +1,6 @@
 {
   "name": "paiwarp-dsh",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "PaiWarp: 在 DeepSeek Harness 桌面端操作本机真实终端，边看边接管，保存可核对的截图和录屏。",
   "type": "module",
   "main": "./host.js",

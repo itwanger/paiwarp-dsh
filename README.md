@@ -1,5 +1,9 @@
 # PaiWarp · paiwarp-dsh
 
+![PaiWarp — Real terminals. Real evidence.](docs/images/hero.png)
+
+<p align="center"><b>真实终端 · 人机共用 · 可核对的运行证据</b><br>DeepSeek Harness 桌面插件 · macOS 已实测 · MIT 开源</p>
+
 **让 DeepSeek Harness 在真实终端里操作你的命令行程序，验证结果，保存截图和录屏。**
 
 A shared local terminal for DeepSeek Harness agents — interactive input, verification, screenshots and recordings.
@@ -19,13 +23,69 @@ Harness 读教程、决定下一条命令；PaiWarp 把输入送进本机终端�
 
 [快速开始](#快速开始) · [示例](examples/README.md) · [安装与排错](docs/installation.md) · [使用指南](docs/usage.md) · [接口](docs/interface.md) · [实测与限制](docs/validation.md) · [参与开发](CONTRIBUTING.md) · [用创造模式开发](docs/creator-mode.md)
 
-## 看一次真实运行
+## 看见状态变化，也核对实际结果
 
-下面是 Harness 通过 PaiWarp 操作 Python 待办程序留下的原始终端截图，包含中文输入、多行添加和完成任务。
+颜色来自程序实际写入终端的 ANSI 控制序列，截图由 PaiWarp 直接保存。下面三组 Color Lab 案例都附完整源码与步骤：蓝色表示准备，黄色表示等待，红色表示失败，绿色表示完成。
+
+### 01 · 从源码到构建产物
+
+在本机编译 Python 源码、运行 5 项测试，再生成 ZIP 包。每一步读取真实进程退出码，最终计算产物的 SHA-256 摘要；进度条对应已完成的步骤。
+
+![真实构建流水线：测试通过后生成可核对的 ZIP 产物](docs/images/color-pipeline-03-artifact.png)
+
+<details>
+<summary>展开查看：准备状态 → 真实测试输出</summary>
+
+![构建准备：青色就绪、黄色等待](docs/images/color-pipeline-01-ready.png)
+
+![五项单元测试的真实运行输出](docs/images/color-pipeline-02-tests.png)
+
+</details>
+
+### 02 · 红色失败，绿色修复
+
+一个预设的乘法错误先让 3 项测试失败。示例程序修改函数，Git 输出原生红绿差异，再用同一份测试验证结果。这是可复现的测试演示；修复动作由示例程序执行。
+
+![Git 原生彩色 diff：删除加法，新增乘法](docs/images/color-git-02-diff.png)
+
+<details>
+<summary>展开查看：修复前失败 → 修复后通过</summary>
+
+![预设缺陷触发三项真实测试失败](docs/images/color-git-01-failing.png)
+
+![相同的三项测试在修复后通过](docs/images/color-git-03-passing.png)
+
+</details>
+
+### 03 · 有错误就停下，处理后再导出
+
+Harness 在交互式 CSV 控制台逐条输入 `scan`、`check`、`export`。发现无效记录时导出被拒绝；清理后重新检查，生成可独立解析的 JSON 报告。原始 CSV 保留。
+
+![交互式数据控制台：无效记录用红色标记](docs/images/color-data-02-invalid.png)
+
+<details>
+<summary>展开查看：初始待检 → 清理后导出</summary>
+
+![数据控制台初始状态](docs/images/color-data-01-pending.png)
+
+![清理后四行有效数据，导出合计 412](docs/images/color-data-03-exported.png)
+
+</details>
+
+**[复跑全部彩色案例 →](examples/color-lab/README.md)** · [逐步 Case 与截图点](examples/color-lab/CASE.md) · [实测记录](docs/color-lab-validation.md) · [下载三段原始录像](https://github.com/itwanger/paiwarp-dsh/releases/tag/v0.2.1)
+
+<details>
+<summary>还有一个最小例子：中文待办命令行</summary>
+
+支持添加中文任务、多行输入、完成任务和重启后的状态核对。
 
 ![真实 Python 终端：添加两条任务并完成第一条](docs/images/python-cli.png)
 
-已在 macOS 的 DeepSeek Harness **0.2.2-rc.1** 桌面端实测。当前版本 **0.2.0**；清单声明的宿主范围是 `>=0.2.2-rc.1 <0.3.0`，范围内其他版本仍需自行验证。Linux 尚未独立验收，Windows 未实现。
+[运行这个例子](examples/python-cli/case.md)
+
+</details>
+
+已在 macOS 的 DeepSeek Harness **0.2.2-rc.1** 桌面端实测。当前版本 **0.2.1**；清单声明的宿主范围是 `>=0.2.2-rc.1 <0.3.0`，范围内其他版本仍需自行验证。Linux 尚未独立验收，Windows 未实现。
 
 ## 快速开始
 
@@ -71,7 +131,7 @@ open -a "DeepSeek Harness" \
 
 1. 打开 Harness 的 **插件 → 添加插件**。
 2. 输入 `paiwarp-dsh` 源码目录的**绝对路径**；可以在上面的目录执行 `pwd` 获取。
-3. 安装后选择**立即启用**，确认显示 PaiWarp 0.2.0。
+3. 安装后选择**立即启用**，确认显示 PaiWarp 0.2.1。
 4. 在标准模式打开待测项目工作区；从右侧边栏的工具入口打开 **PaiWarp**。
 
 插件目录与待测项目目录可以分开。创造模式用于开发插件；日常使用只需要标准模式。若升级时提示组件仍在使用，先结束相关任务，再完全退出、重开 Harness 后处理旧插件链接。[官方插件管理说明](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.2-rc.1/packages/client/ui-plugin-manager/README.zh.md)。
@@ -182,6 +242,18 @@ cp examples/python-cli/case.md ../paiwarp-demo/CASE.md
 - 受控 Bash 可记录命令退出码；交互程序内部步骤、其他 shell、运行器清单缺失字段不能凭空当作 0。
 
 完整范围、日期和已知问题见[实测记录](docs/validation.md)。
+
+## 常见问题
+
+**不安装 Codex 能用吗？** 可以。需要 DeepSeek Harness 桌面端、本插件及安装步骤里的本机依赖。Codex 不参与插件运行。
+
+**只支持 PaiCLI 和教程章节吗？** 不限定项目。插件负责开终端、输入、读屏、等待和保存材料；要运行什么程序、怎样验收，由你的提示词与 Case 文件描述。
+
+**彩色画面需要额外主题吗？** 不需要。终端保留程序的 ANSI 颜色输出，截图与录像记录相同画面。Color Lab 的着色代码与示例一起公开，可以按需要调整。
+
+**一句话为什么能跑多个步骤？** Harness 先读 Case，调用插件输入命令，再根据输出继续操作。插件本身不替模型规划，也不把失败的业务检查改成通过。
+
+**会自动修改教程吗？** 默认只保存材料。要更新教程，明确指定目标文件与图片对应关系，再调用只换图工具；它不会重写正文。
 
 ## 开发与许可
 
