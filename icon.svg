@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PaiWarp">
+  <rect width="64" height="64" rx="15" fill="#121722"/>
+  <rect x="9" y="12" width="46" height="34" rx="5" fill="#1b2432" stroke="#79a9ff" stroke-width="2"/>
+  <path d="m17 23 7 5.5-7 5.5" fill="none" stroke="#dbe8ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M29 34h9" stroke="#dbe8ff" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="49" cy="18" r="3.4" fill="#ff6b6b"/>
+  <path d="M14 52h36" stroke="#4d6285" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

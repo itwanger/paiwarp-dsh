@@ -1,0 +1,74 @@
+{
+  "name": "paiwarp-dsh",
+  "version": "0.2.0",
+  "description": "PaiWarp: 在 DeepSeek Harness 桌面端操作本机真实终端，边看边接管，保存可核对的截图和录屏。",
+  "type": "module",
+  "main": "./host.js",
+  "exports": {
+    ".": "./host.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "host.js",
+    "client.js",
+    "terminal.html",
+    "lib/*.js",
+    "lib/*.py",
+    "vendor/xterm/*",
+    "examples/**",
+    "docs/*.md",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "CONTRIBUTING.md",
+    "THIRD-PARTY-NOTICES.md",
+    "LICENSE",
+    "docs/images/*.png"
+  ],
+  "scripts": {
+    "doctor": "python3 lib/doctor.py",
+    "test": "node --test tests/*.test.mjs",
+    "test:pty": "python3 tests/pty_smoke.py",
+    "test:pack": "node tests/pack-install.mjs"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itwanger/paiwarp-dsh.git"
+  },
+  "homepage": "https://github.com/itwanger/paiwarp-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/itwanger/paiwarp-dsh/issues"
+  },
+  "author": "itwanger (沉默王二)",
+  "keywords": [
+    "deepseek",
+    "harness",
+    "terminal",
+    "pty",
+    "agent-testing",
+    "screenshot",
+    "screen-recording"
+  ]
+}
