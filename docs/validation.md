@@ -50,6 +50,7 @@ npm run test:pack
 4. 只有受控 Bash 能记录命令退出状态；交互程序内部命令和其他 shell 可能未知。
 5. 本次 Python 运行的 `paiwarp_close` 即时回复带运行器退出码 0，但 `run.json.runtimeExitCode` 保留 null。以缺失处理，不把 null 当成 0；被测 Python 两次退出 0 有各自 Bash 状态佐证。关闭交互 Bash 的 SIGHUP 是另一个状态。
 6. `doctor.py` 目前显示 Python 版本但未严格比较最低版本，请自行确认 3.9+。
-7. 与某一版 Harness 兼容，不代表未来宿主接口变化后无需更新。
+7. Color Lab 中 `paiwarp_open(record=true)` 即时回复曾显示 `recording:false`，随后录制工具返回“已经在录屏”；实际视频生成并解码通过。打开时的状态字段尚有不一致，需用录制工具与产物继续核对。
+8. 与某一版 Harness 兼容，不代表未来宿主接口变化后无需更新。
 
 遇到新问题请附可复现步骤和脱敏错误，在 Issues 中区分“插件输入/保存出错”和“被测程序业务失败”。
